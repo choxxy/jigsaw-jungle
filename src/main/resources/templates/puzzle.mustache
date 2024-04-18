@@ -1,0 +1,117 @@
+{{> header}}
+
+<div class="ui disabled">
+    <!-- ending -->
+    <div class="ui-popup-container disabled">
+        <div class="ui-xpopup">
+            <!-- Thank you for playing -->
+            <div class="section">
+                <h1>Thank you for playing!</h1>
+                <p>
+                    Follow
+                    <a href="https://twitter.com/Puzzle_fy" target="_blank"
+                    >@Puzzle_fy</a> on twitter
+                </p>
+            </div>
+            <!-- Puzzle generator -->
+            <div class="section container">
+                <h2>Generate your puzzle</h2>
+                <p hidden>Make your own puzzle and share it with your friends!</p>
+                <input type="text" placeholder="Image link" id="url"/>
+                <input type="number" placeholder="Width" min="0" id="cols"/> x
+                <input type="number" placeholder="Height" min="0" id="rows"/>
+                <br/><br/>
+                <div>
+                    <button type="button" onclick="window.location.href = generate()">
+                        Generate
+                    </button>
+                    <button type="button" class="copy" onclick="copyGenerate()">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button type="button" class="twitter" onclick="shareGenerate()">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Play again -->
+            <div class="section">
+                <a id="again">
+                    <button type="button">Play again</button>
+                </a>
+                <a id="share" target="_blank"
+                >
+                    <button type="button" class="twitter">
+                        <i class="fab fa-twitter"></i></button
+                    >
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- follow, share, (generate, share), (zombiecraft link, discord), play again -->
+
+    <!-- functionalities -->
+    <div class="ui-container">
+        <div id='increase-pieces-button-div' class="tooltip">
+            <span class="tooltip-content">Increase pieces</span>
+            <div class="functionality" onclick="increasePieces()">
+                <span id="increase-pieces-button">+36</span>
+            </div>
+        </div>
+        <div id="reduce-pieces-button-div" class="tooltip">
+            <span class="tooltip-content">Reduce pieces</span>
+            <div class="functionality" onclick="reducePieces()">
+                <span id="reduce-pieces-button">-36</span>
+            </div>
+        </div>
+        <div class="tooltip">
+            <span class="tooltip-content">Preview</span>
+            <div class="functionality" onclick="hint()">
+                <i class="fas fa-eye"></i>
+            </div>
+        </div>
+        <div class="tooltip">
+            <span class="tooltip-content">Fullscreen</span>
+            <div class="functionality" onclick="toggleFullscreen(this)">
+                <i class="fas fa-expand"></i>
+            </div>
+        </div>
+        <!-- cheated -->
+        <div class="tooltip">
+            <span class="tooltip-content">Reset</span>
+            <div class="functionality" onclick="reset()">
+                <i class="fas fa-undo"></i>
+            </div>
+        </div>
+        <div class="tooltip">
+            <span class="tooltip-content">Solve</span>
+            <div class="functionality" onclick="solve()">
+                <i class="fas fa-puzzle-piece"></i>
+            </div>
+        </div>
+        <!-- social -->
+        <div class="tooltip">
+            <span class="tooltip-content">Share</span>
+            <div class="functionality twitter" onclick="share()">
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- stats -->
+    <div class="stats-container">
+        <span id="stats" class="stats">placed 0 of 100 pieces | </span><span class="hours"></span>:</span><span
+            class="minutes"></span>:<span class="seconds"> </span>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<script src="js/jigsaw.js"></script>
+<script src="js/plugins/cors.js"></script>
+<script src="js/plugins/transform.js"></script>
+<script src="js/script.js"></script>
+<script src="js/timer.js"></script>
+
+{{> footer}}
