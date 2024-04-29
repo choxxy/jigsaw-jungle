@@ -1,18 +1,18 @@
-let canvas;
+var canvas;
 
-let img, preview, frame;
-let tiles, pieces, placed, unplaced, puzzle, board;
+var img, preview, frame;
+var tiles, pieces, placed, unplaced, puzzle, board;
 
-let originalCols, cols, originalRows, rows, aspect;
-let imagePath;
-let cropX, cropY;
-let scl, s;
+var originalCols, cols, originalRows, rows, aspect;
+var imagePath;
+var cropX, cropY;
+var scl, s;
 
 const maxPieces = 300;
 
 const positions = new Map();
 
-let loading = true,
+var loading = true,
     verifying = false,
     solved = false,
     error = false,
@@ -39,17 +39,19 @@ const OUT = 1;
 const HORIZONTAL = "horizontal";
 const VERTICAL = "vertical";
 
-let prev;
+var prev;
 
 function setup() {
     const imageParam = params.get("image")
-        ? "./images/" + params.get("image")
+        ? params.get("image")
         : "./images/sun-flower.jpg";
     const imageURL = isEncoded(imageParam)
         ? decodeURIComponent(imageParam)
         : imageParam;
 
     imagePath = imageURL;
+
+    console.log("Image -=>" +  imageURL);
 
     canvas = createCanvas(windowWidth, windowHeight);
 
@@ -71,17 +73,14 @@ function setup() {
             },
             (failure) => (error = true)
         );
-    }
-
-    // image
-    else {
+    } else {
         // solution for any image to load
         createImg(imageURL, "puzzle", null, (event) => {
-            var element = event.elt;
+            let  element = event.elt;
             img = new p5.Image(element.width, element.height, p5.instance);
+            console.log(img);
             img.drawingContext.drawImage(element, 0, 0);
             img.modified = true;
-
             document.querySelector(".ui").classList.remove("disabled");
             loading = false;
             start();

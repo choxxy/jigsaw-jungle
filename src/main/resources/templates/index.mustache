@@ -3,11 +3,9 @@
 <h1>{{title}}</h1>
 
 <div class="image-container">
-    <img src="https://picsum.photos/300?random=1" />
-    <img src="https://picsum.photos/300?random=2" />
-    <img src="https://picsum.photos/300?random=3" />
-    <img src="https://picsum.photos/300?random=4" />
-
+    {{#photos}}
+        <img id="{{id}}" class="photo" src="{{photoUrl}}"/>
+    {{/photos}}
 </div>
 <button class="btn">Load More</button>
 
