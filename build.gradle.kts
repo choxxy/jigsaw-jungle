@@ -31,8 +31,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-integration")
-    implementation("org.springframework.integration:spring-integration-file")
-    implementation("org.springframework.integration:spring-integration-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("commons-io:commons-io:2.16.1")
