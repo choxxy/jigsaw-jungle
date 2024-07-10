@@ -1,5 +1,6 @@
 let startTime = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 localStorage.setItem("startTime", startTime); // Store it if I want to restart the timer on the next page
+let timeoutId = 0;
 
 function startTimeCounter() {
     let now = Math.floor(Date.now() / 1000); // get the time now
@@ -10,7 +11,7 @@ function startTimeCounter() {
     document.querySelector(".seconds").innerHTML = pad(s);
     document.querySelector(".minutes").innerHTML = pad(m);
     document.querySelector(".hours").innerHTML = pad(h);
-    let t = setTimeout(startTimeCounter, 500); // set a timeout to update the timer
+    timeoutId = setTimeout(startTimeCounter, 500); // set a timeout to update the timer
 }
 
 function pad(i) {
@@ -18,4 +19,12 @@ function pad(i) {
     return i;
 }
 
-startTimeCounter();
+document.addEventListener('DOMContentLoaded', (event) => {
+    startTimeCounter();
+    // Listen for the custom event
+    document.addEventListener('puzzleSolved', (e) => {
+        clearTimeout(timeoutId);
+    });
+});
+
+

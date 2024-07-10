@@ -31,11 +31,8 @@ function drawPuzzleSide(pg, side, curve, w, h) {
 
 function drawPuzzleSideShape(shaped, pg, side, curve, size, h, style) {
     var s = size / 100
-
     pg.push()
-    
     style()
-
     switch(side) {
         case BOTTOM:
             pg.translate(0, size)
@@ -51,7 +48,6 @@ function drawPuzzleSideShape(shaped, pg, side, curve, size, h, style) {
             pg.translate(0, -size)
             break;
     }
-
     pg.beginShape()
     pg.vertex(0, 0)
 

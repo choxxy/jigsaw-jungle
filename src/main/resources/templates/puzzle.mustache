@@ -1,4 +1,32 @@
 {{> header}}
+<body>
+
+<!-- for use with <use> -->
+<svg xmlns="http://www.w3.org/2000/svg"  hidden>
+    <symbol id="arrow" viewbox="0 0 16 16" >
+        <polyline points="4 6, 8 10, 12 6" stroke="#fff" stroke-width="2" fill="transparent" stroke-linecap="round" />
+    </symbol>
+</svg>
+
+<!-- In the real world, all hrefs would have go to real, unique URLs, not a "#" -->
+<nav id="site-navigation" class="site-navigation">
+    <a class="home-menu" href="/">Home</a>
+    <ul class="clicky-menu no-js" id="main-menu">
+        <li>
+            <a href="#" id="menu-toggle">
+                Change Puzzle Size
+                <svg aria-hidden="true" width="16" height="16">
+                    <use xlink:href="#arrow" />
+                </svg>
+            </a>
+            <ul id="puzzle-sizes"></ul>
+        </li>
+    </ul>
+</nav>
+
+
+<input type="hidden" id="photoUrl" value="{{photoUrl}}">
+<input type="hidden" id="photoId" value="{{photoId}}">
 
 <div class="ui disabled">
     <!-- ending -->
@@ -38,32 +66,16 @@
                 <a id="again">
                     <button type="button">Play again</button>
                 </a>
-                <a id="share" target="_blank"
-                >
+                <a id="share" target="_blank">
                     <button type="button" class="twitter">
-                        <i class="fab fa-twitter"></i></button
-                    >
+                        <i class="fab fa-twitter"></i></button>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- follow, share, (generate, share), (zombiecraft link, discord), play again -->
-
     <!-- functionalities -->
     <div class="ui-container">
-        <div id='increase-pieces-button-div' class="tooltip">
-            <span class="tooltip-content">Increase pieces</span>
-            <div class="functionality" onclick="increasePieces()">
-                <span id="increase-pieces-button">+36</span>
-            </div>
-        </div>
-        <div id="reduce-pieces-button-div" class="tooltip">
-            <span class="tooltip-content">Reduce pieces</span>
-            <div class="functionality" onclick="reducePieces()">
-                <span id="reduce-pieces-button">-36</span>
-            </div>
-        </div>
         <div class="tooltip">
             <span class="tooltip-content">Preview</span>
             <div class="functionality" onclick="hint()">
@@ -91,7 +103,23 @@
             </div>
         </div>
     </div>
-
+    <div class="list-wrapper disabled">
+        <ul id="photo-list">
+            {{#photos}}
+                <li class="card" onclick="itemClicked(this)">
+                    <img id="{{id}}" src="{{photoUrl}}" alt="img">
+                    <div class="details">
+                        <div class="photographer">
+                            <i class="uil uil-camera"></i>
+                            <span>{{description}}</span>
+                        </div>
+                    </div>
+                </li>
+            {{/photos}}
+        </ul>
+        <button onclick="handleClick('previous')" class="button button--previous" type="button">➜</button>
+        <button onclick="handleClick('next')" class="button button--next" type="button">➜</button>
+    </div>
     <!-- stats -->
     <div class="stats-container">
         <span id="stats" class="stats">placed 0 of 100 pieces | </span><span class="hours"></span>:</span><span
@@ -99,13 +127,12 @@
     </div>
 </div>
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.js"></script>
 <script src="js/jigsaw.js"></script>
 <script src="js/plugins/cors.js"></script>
 <script src="js/plugins/transform.js"></script>
 <script src="js/script.js"></script>
 <script src="js/timer.js"></script>
 
-{{> footer}}
+</body>
+</html>

@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&display=swap');
+
+html, body {
+  font-family: "Nunito", sans-serif;
+  background: #fff;
+}
+
+h2 {
+  font-family: "Nunito", sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  color: #454cad;
+  margin-bottom: 0;
+}
+
+p {
+  font-family: "Nunito", sans-serif;
+  font-size: 18px;
+  color: #5f6982;
+}
+
+.editor-container {
+  width: 100%;
+  padding: 16px;
+  margin: auto;
+  background: #e3f2fd;
+  border-radius: 8px;
+}
+
+.editor-container.disable .editor-panel, .editor-container.disable .controls .reset-filter, .editor-container.disable .controls .save-img {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.editor-container h2 {
+  margin-top: -8px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.editor-container .wrapper {
+  display: flex;
+  margin: 20px 0;
+  min-height: 420px;
+}
+
+.wrapper .editor-panel {
+  padding: 15px 20px;
+  width: 320px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.editor-panel .title {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.editor-panel .options, .controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.editor-panel button {
+  outline: none;
+  height: 40px;
+  font-size: 14px;
+  color: #6c757d;
+  background: #fff;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  border: 1px solid #aaa;
+}
+
+.editor-panel select {
+  outline: none;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  color: #6c757d;
+  background: #fff;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  border: 1px solid #aaa;
+}
+
+.editor-panel .filter button {
+  width: calc(100% / 2 - 4px);
+}
+
+.editor-panel button:hover {
+  background: #f5f5f5;
+}
+
+.filter button.active {
+  color: #fff;
+  border-color: #5372f0;
+  background: #5372f0;
+}
+
+.filter .slider {
+  margin-top: 12px;
+}
+
+.filter .slider .filter-info {
+  display: flex;
+  color: #464646;
+  font-size: 14px;
+  justify-content: space-between;
+}
+
+.filter .slider input {
+  width: 100%;
+  height: 5px;
+  accent-color: #5372f0;
+}
+
+.editor-panel .rotate {
+  margin-top: 17px;
+}
+
+.editor-panel .rotate button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% / 4 - 3px);
+}
+
+.rotate .options button:nth-child(3), .rotate .options button:nth-child(4) {
+  font-size: 18px;
+}
+
+.rotate .options button:active {
+  color: #fff;
+  background: #5372f0;
+  border-color: #5372f0;
+}
+
+.wrapper .preview-img {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  margin-left: 20px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-img img {
+  max-width: 640px;
+  max-height: 480px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.controls button {
+  padding: 11px 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.controls .reset-filter {
+  color: #6c757d;
+  border: 1px solid #6c757d;
+}
+
+.controls .reset-filter:hover {
+  color: #fff;
+  background: #6c757d;
+}
+
+.controls .choose-img {
+  background: #6c757d;
+  border: 1px solid #6c757d;
+}
+
+.controls .save-img {
+  margin-left: 5px;
+  background: #5372f0;
+  border: 1px solid #5372f0;
+}
+
+.select-box {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Open Sans", "Helvetica Neue", "Segoe UI", "Calibri", "Arial", sans-serif;
+  font-size: 18px;
+  color: #60666d;
+}
+
+@media (min-width: 768px) {
+  .select-box {
+    width: 70%;
+  }
+}
+
+@media (min-width: 992px) {
+  .select-box {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .select-box {
+    width: 30%;
+  }
+}
+
+.select-box__current {
+  position: relative;
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
+}
+
+.select-box__current:focus + .select-box__list {
+  opacity: 1;
+  -webkit-animation-name: none;
+  animation-name: none;
+}
+
+.select-box__current:focus + .select-box__list .select-box__option {
+  cursor: pointer;
+}
+
+.select-box__current:focus .select-box__icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-box__icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 20px;
+  opacity: 0.3;
+  transition: 0.2s ease;
+}
+
+.select-box__value {
+  display: flex;
+}
+
+.select-box__input {
+  display: none;
+}
+
+.select-box__input:checked + .select-box__input-text {
+  display: block;
+}
+
+.select-box__input-text {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.select-box__list {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  -webkit-animation-name: HideList;
+  animation-name: HideList;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: step-start;
+  animation-timing-function: step-start;
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.select-box__option {
+  display: block;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.select-box__option:hover, .select-box__option:focus {
+  color: #546c84;
+  background-color: #fbfbfb;
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .editor-container {
+    padding: 25px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .editor-container .wrapper {
+    flex-wrap: wrap-reverse;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .wrapper .editor-panel {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .wrapper .preview-img {
+    width: 100%;
+    margin: 0 0 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .controls button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .controls .controls-row {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .controls .controls-row .save-img {
+    margin-left: 0px;
+  }
+}
+

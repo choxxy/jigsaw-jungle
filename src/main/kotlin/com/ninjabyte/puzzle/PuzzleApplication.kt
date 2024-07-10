@@ -27,13 +27,13 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 class PuzzleApplication {
-//    @Bean
-//    fun commandLineRunner(storageService: StorageService): CommandLineRunner {
-//        return CommandLineRunner { args: Array<String?>? ->
-//            storageService.deleteAll()
-//            storageService.init()
-//        }
-//    }
+    @Bean
+    fun commandLineRunner(storageService: StorageService): CommandLineRunner {
+        return CommandLineRunner { args: Array<String?>? ->
+            // storageService.deleteAll()
+            storageService.init()
+        }
+    }
 
     companion object {
         @JvmStatic

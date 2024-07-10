@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.time.Instant
 
 plugins {
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
+    id("com.google.cloud.tools.jib") version "3.4.2"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
@@ -50,4 +52,23 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+
+jib {
+    var tag = "latest"
+    from {
+        image = "eclipse-temurin:21-jdk-alpine"
+    }
+    to {
+        image = "africanwolf/${rootProject.name}:$version"
+        tags = setOf("$version", tag)
+        auth {
+            username="africanwolf"
+            password="r@@tmaster"
+        }
+    }
+    container {
+        creationTime = Instant.now().toString()
+    }
 }

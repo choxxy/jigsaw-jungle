@@ -1,14 +1,44 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
 {{> header}}
 
-<h1>{{title}}</h1>
-
-<div class="image-container">
-    {{#photos}}
-        <img id="{{id}}" class="photo" src="{{photoUrl}}"/>
-    {{/photos}}
-</div>
-<button class="btn">Load More</button>
-
-<script src="js/index.js"></script>
-
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
+<nav class="navbar navbar-expand-lg fixed-top bg-secondary text-uppercase navbar-light" id="mainNav"
+     style="height: 64px;">
+    <div class="container"><a class="navbar-brand" href="#page-top">Brand</a>
+        <button data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i
+                class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a
+                        class="nav-link d-lg-flex align-items-lg-center px-0 px-lg-3 rounded" href="studio"
+                        style="height: 42px;">Create</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a
+                        class="nav-link d-lg-flex align-items-lg-center px-0 px-lg-3 rounded" href="#about"
+                        style="height: 42px;">About</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a
+                        class="nav-link d-lg-flex align-items-lg-center px-0 px-lg-3 rounded" href="#contact"
+                        style="height: 42px;">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section id="portfolio" class="portfolio" style="margin-top: 16px;overflow: auto;height: 90%;position: relative;">
+    <div class="container">
+        <h2 class="text-secondary" style="font-size: 32px;">New Puzzles</h2>
+        <div id="new-puzzles-container "class="row">
+            {{#photos}}
+                <div class="col-md-6 col-lg-4">
+                    <img id="{{id}}" class="photo img-fluid" src="{{photoUrl}}">
+                </div>
+            {{/photos}}
+        </div>
+        <h2 class="text-secondary" style="font-size: 32px;">Explore</h2>
+        <div class="row">
+        </div>
+    </div>
+</section>
 {{> footer}}

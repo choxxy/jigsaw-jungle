@@ -41,17 +41,43 @@ const VERTICAL = "vertical";
 
 var prev;
 
+
+itemClicked = function (element) {
+    const id = element.getElementsByTagName("img")[0].id;
+    const nextPageUrl = `puzzle?id=${id}`;
+    // Navigate to the next page
+    window.location.href = nextPageUrl;
+}
+
+const list = document.getElementById("photo-list");
+
+// We want to know the width of one of the items. We'll use this to decide how many pixels we want our carousel to scroll.
+const item = document.querySelector(".card");
+const itemWidth = /*item.offsetWidth +*/ 200;
+
+function handleClick(direction) {
+    console.log(direction);
+    console.log(itemWidth)
+    // Based on the direction we call `scrollBy` with the item width we got earlier
+    if (direction === "previous") {
+        list.scrollBy({left: -itemWidth, behavior: "smooth"});
+    } else {
+        list.scrollBy({left: itemWidth, behavior: "smooth"});
+    }
+}
+
+let photoUrl = document.getElementById("photoUrl").value;
+let photoId = document.getElementById("photoId").value;
+
 function setup() {
-    const imageParam = params.get("image")
-        ? params.get("image")
-        : "./images/sun-flower.jpg";
+    const imageParam = photoUrl ? photoUrl : "./images/sun-flower.jpg";
     const imageURL = isEncoded(imageParam)
         ? decodeURIComponent(imageParam)
         : imageParam;
 
     imagePath = imageURL;
 
-    console.log("Image -=>" +  imageURL);
+    console.log("Image -=>" + imageURL);
 
     canvas = createCanvas(windowWidth, windowHeight);
 
@@ -76,7 +102,7 @@ function setup() {
     } else {
         // solution for any image to load
         createImg(imageURL, "puzzle", null, (event) => {
-            let  element = event.elt;
+            let element = event.elt;
             img = new p5.Image(element.width, element.height, p5.instance);
             console.log(img);
             img.drawingContext.drawImage(element, 0, 0);
@@ -91,6 +117,69 @@ function setup() {
     setTimeout(() => (loading ? (error = true) : false), 5000);
 }
 
+
+function generatePuzzleSizeMenuItems() {
+
+    const originalSize = parseInt(originalCols) * parseInt(originalRows);
+
+    let newCol = parseInt(originalCols);
+    let newRow = parseInt(originalRows);
+
+    const puzzleSizes = [{rows: originalRows, cols: originalCols, size: originalSize}];
+
+    while ((newCol * newRow) < maxPieces) {
+        newCol += parseInt(2);
+        newRow += parseInt(2);
+        if ((newCol * newRow) > maxPieces)
+            break
+        let size = newRow * newCol;
+        puzzleSizes.push({rows: newRow, cols: newCol, size: size});
+    }
+
+    const puzzleSizesList = document.getElementById('puzzle-sizes');
+
+    puzzleSizes.forEach(item => {
+        const listItem = document.createElement('li');
+        const anchor = document.createElement('a');
+        anchor.href = '#';
+        anchor.textContent = item.size === originalSize ? "Original Pieces" : item.size + " Pieces";
+        listItem.classList.add('menu-item'); // Add class for consistent styling
+        listItem.appendChild(anchor);
+        listItem.dataset.rows = item.rows.toString();
+        listItem.dataset.cols = item.cols.toString();
+        listItem.dataset.size = item.size.toString();
+        listItem.id = item.size.toString();
+        puzzleSizesList.appendChild(listItem);
+    });
+
+    //////////////// add event listeners
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.querySelector('#main-menu > li > ul');
+
+    menuToggle.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (menu.style.display === 'block' || menu.style.display === '') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
+
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function () {
+            // Access the data attribute value
+            const rows = item.dataset.rows;
+            const cols = item.dataset.cols;
+
+            generatePuzzle(rows, cols);
+            // Hide the menu after clicking a menu item
+            menu.style.display = 'none';
+        });
+    });
+}
+
 function start() {
     aspect = aspectRatio(
         round(img.width / 100) * 100,
@@ -98,16 +187,22 @@ function start() {
     );
 
     // simplify aspect for undefined cols & rows
-    if (aspect.x == 1 && aspect.y == 1) aspect = {x: 6, y: 6};
+    if (aspect.x == 1 && aspect.y == 1)
+        aspect = {x: 6, y: 6};
+
     while (aspect.x * aspect.y >= 50)
         aspect = {x: parseInt(aspect.x / 2), y: parseInt(aspect.y / 2)};
+
     //while (aspect.x * aspect.y <= 20)
     //  aspect = { x: parseInt(aspect.x * 2), y: parseInt(aspect.y * 2) };
+
     while (aspect.x * aspect.y <= 9)
         aspect = {x: parseInt(aspect.x * 2), y: parseInt(aspect.y * 2)};
 
     originalCols = aspect.x;
     originalRows = aspect.y;
+
+    generatePuzzleSizeMenuItems();
 
     cols = params.get("cols") > 0 ? params.get("cols") : aspect.x;
     rows = params.get("rows") > 0 ? params.get("rows") : aspect.y;
@@ -423,8 +518,6 @@ function onComplete() {
 }
 
 function onSolve() {
-    console.log("solved!");
-
     solved = true;
     previewing = millis();
 
@@ -435,7 +528,7 @@ function onSolve() {
 
     // end form
     setTimeout(() => {
-        document.querySelector(".ui-popup-container").classList.remove("disabled");
+        document.querySelector(".list-wrapper").classList.remove("disabled");
         document.querySelector(".ui-container").classList.add("disabled");
     }, 3000);
 }
@@ -452,7 +545,6 @@ function placePieces(piece, index, arr) {
 
     piece.x = piece.index.x * (tile.width / 2);
     piece.y = piece.index.y * (tile.height / 2);
-
 }
 
 
@@ -464,34 +556,7 @@ function hint() {
     previewing = millis();
 }
 
-function increasePieces() {
-    generatePuzzle(2);
-}
-
-function reducePieces() {
-    generatePuzzle(-2);
-}
-
 function updateViews(placedPieces, totalPieces) {
-    const reducePiecesButton = document.getElementById("reduce-pieces-button");
-    const reducePiecesButtonDiv = document.getElementById(
-        "reduce-pieces-button-div"
-    );
-    const increasePiecesButton = document.getElementById(
-        "increase-pieces-button"
-    );
-    const increasePiecesButtonDiv = document.getElementById(
-        "increase-pieces-button-div"
-    );
-    const stats = document.getElementById("stats");
-
-    increasePiecesButton.innerText = "+2";
-    reducePiecesButton.innerText = "-1";
-
-    if (cols > originalCols || rows > originalRows)
-        reducePiecesButtonDiv.style.display = "inline-block";
-    else reducePiecesButtonDiv.style.display = "none";
-
     stats.innerText =
         "placed " + placedPieces + " of " + totalPieces + " pieces |";
 }
@@ -520,24 +585,24 @@ function verify() {
     verifying = false;
 }
 
-function generatePuzzle(delta) {
-    const img = "sun-flower.jpg";
+function generatePuzzle(rows, cols) {
 
-    const newCols = parseInt(cols) + parseInt(delta);
-    const newRows = parseInt(rows) + parseInt(delta);
+    const newCols = parseInt(cols);
+    const newRows = parseInt(rows);
 
     if (
         newCols * newRows > maxPieces ||
         newCols < originalCols ||
         newRows < originalRows
-    )
+    ) {
         return;
+    }
 
     const url = new URL(window.location.origin + window.location.pathname);
 
-    if (img) url.searchParams.set("image", img);
-    if (newCols) url.searchParams.set("cols", newCols);
-    if (newRows) url.searchParams.set("rows", newRows);
+    url.searchParams.set("id", photoId ? photoId : "1");
+    if (newCols) url.searchParams.set("cols", newCols.toString());
+    if (newRows) url.searchParams.set("rows", newRows.toString());
 
     location.replace(url.toString());
 }
@@ -755,3 +820,5 @@ function drawJigsaw(x, y, weight, stroke) {
 function numFrames(img) {
     return img.numFrames() || 1;
 }
+
+
