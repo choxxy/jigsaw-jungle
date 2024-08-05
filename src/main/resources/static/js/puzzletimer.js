@@ -12,9 +12,15 @@ class PuzzleTimer {
         const m = Math.floor((diff / 60) % 60);
         const s = Math.floor(diff % 60);
 
-        document.querySelector(".seconds").innerHTML = this.pad(s);
-        document.querySelector(".minutes").innerHTML = this.pad(m);
-        document.querySelector(".hours").innerHTML = this.pad(h);
+        const secondsElement = document.querySelector(".seconds");
+        const minutesElement = document.querySelector(".minutes");
+        const hoursElement = document.querySelector(".hours");
+
+        if (secondsElement && minutesElement && hoursElement) {
+            secondsElement.innerHTML = this.pad(s);
+            minutesElement.innerHTML = this.pad(m);
+            hoursElement.innerHTML = this.pad(h);
+        }
 
         this.timeoutId = setTimeout(() => this.startTimeCounter(), 500);
     }
