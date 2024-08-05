@@ -56,9 +56,6 @@ const item = document.querySelector(".card");
 const itemWidth = /*item.offsetWidth +*/ 200;
 
 function handleClick(direction) {
-    console.log(direction);
-    console.log(itemWidth)
-    // Based on the direction we call `scrollBy` with the item width we got earlier
     if (direction === "previous") {
         list.scrollBy({left: -itemWidth, behavior: "smooth"});
     } else {
