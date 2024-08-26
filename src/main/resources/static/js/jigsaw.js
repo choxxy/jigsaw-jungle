@@ -13,6 +13,14 @@ const shape = [
     [ 63, 5, 65, 15, 100, 0 ]
 ]
 
+/**
+ * Draws the mask for a puzzle piece side.
+ * @param {object} pg - The graphics object to draw on.
+ * @param {string} side - The side of the puzzle piece (TOP, BOTTOM, LEFT, RIGHT).
+ * @param {number} curve - The curve type (IN, OUT, NONE).
+ * @param {number} w - The width of the puzzle piece.
+ * @param {number} h - The height of the puzzle piece.
+ */
 function drawPuzzleSideMask(pg, side, curve, w, h) {
     drawPuzzleSideShape(true, pg, side, curve , w, h, () => {
         pg.fill(0)
@@ -21,6 +29,14 @@ function drawPuzzleSideMask(pg, side, curve, w, h) {
     })
 }
 
+/**
+ * Draws the outline for a puzzle piece side.
+ * @param {object} pg - The graphics object to draw on.
+ * @param {string} side - The side of the puzzle piece (TOP, BOTTOM, LEFT, RIGHT).
+ * @param {number} curve - The curve type (IN, OUT, NONE).
+ * @param {number} w - The width of the puzzle piece.
+ * @param {number} h - The height of the puzzle piece.
+ */
 function drawPuzzleSide(pg, side, curve, w, h) {
     drawPuzzleSideShape(false, pg, side, curve , w, h, () => {
         pg.noFill()
@@ -29,6 +45,16 @@ function drawPuzzleSide(pg, side, curve, w, h) {
     })
 }
 
+/**
+ * Draws the shape of a puzzle piece side.
+ * @param {boolean} shaped - Whether the shape is filled or not.
+ * @param {object} pg - The graphics object to draw on.
+ * @param {string} side - The side of the puzzle piece (TOP, BOTTOM, LEFT, RIGHT).
+ * @param {number} curve - The curve type (IN, OUT, NONE).
+ * @param {number} size - The size of the puzzle piece.
+ * @param {number} h - The height of the puzzle piece.
+ * @param {function} style - The styling function to apply.
+ */
 function drawPuzzleSideShape(shaped, pg, side, curve, size, h, style) {
     var s = size / 100
     pg.push()
@@ -68,10 +94,18 @@ function drawPuzzleSideShape(shaped, pg, side, curve, size, h, style) {
     pg.pop()
 }
 
+/**
+ * Resizes the canvas when the window is resized.
+ */
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight)
 }
 
+/**
+ * Converts image tiles into puzzle pieces with masks and outlines.
+ * @param {array} tiles - The array of image tiles.
+ * @returns {array} The array of puzzle pieces.
+ */
 function puzzleify(tiles) {
     var w = parseInt(tiles.sizeX), h = parseInt(tiles.sizeY)
 
@@ -152,6 +186,11 @@ function puzzleify(tiles) {
     return tiles
 }
 
+/**
+ * Converts an image to a mask by transferring grayscale values to alpha.
+ * @param {object} img - The image to be maskified.
+ * @returns {object} The maskified image.
+ */
 function maskify(img) {
     img.loadPixels();
 
@@ -165,12 +204,26 @@ function maskify(img) {
     return img
 }
 
+/**
+ * Converts a graphics object to an image and removes the graphics object.
+ * @param {object} pg - The graphics object to be converted.
+ * @returns {object} The resulting image.
+ */
 function imagify(pg) {
     var img = pg.get()
     pg.remove()
     return img
 }
 
+/**
+ * Cuts an image into tiles based on the specified number of columns and rows.
+ * @param {object} img - The image to be cut.
+ * @param {number} cols - The number of columns.
+ * @param {number} rows - The number of rows.
+ * @param {string} alignX - The horizontal alignment (LEFT, CENTER, RIGHT).
+ * @param {string} alignY - The vertical alignment (TOP, CENTER, BOTTOM).
+ * @returns {array} The array of image tiles.
+ */
 function cut(img, cols, rows, alignX, alignY) {
     var squared = (alignX || alignY)
 
@@ -247,11 +300,23 @@ function cut(img, cols, rows, alignX, alignY) {
     return tiles
 }
 
+/**
+ * Calculates the greatest common divisor of two numbers.
+ * @param {number} a - The first number.
+ * @param {number} b - The second number.
+ * @returns {number} The greatest common divisor.
+ */
 function gcd(a, b) {
     if(b == 0) return a
     return gcd (b, a % b)
 }
 
+/**
+ * Calculates the aspect ratio of a given width and height.
+ * @param {number} w - The width.
+ * @param {number} h - The height.
+ * @returns {object} The aspect ratio as an object with x and y properties.
+ */
 function aspectRatio(w, h) {
     var gcd = window.gcd(w, h)
     return { x: w/gcd, y: h/gcd }
