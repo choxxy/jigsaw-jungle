@@ -27,11 +27,6 @@ const Theme = {
     board_outline: [220],
 };
 
-const Settings = {
-    allowIncorectPlacements: true,
-    hintIncorectPlacements: true,
-};
-
 const NONE = 0;
 const IN = -1;
 const OUT = 1;
@@ -40,7 +35,6 @@ const HORIZONTAL = "horizontal";
 const VERTICAL = "vertical";
 
 var prev;
-
 
 itemClicked = function (element) {
     const id = element.getElementsByTagName("img")[0].id;
