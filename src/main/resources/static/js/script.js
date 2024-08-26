@@ -813,3 +813,4 @@ function numFrames(img) {
 }
 
 
+import { hello } from './hello.js';
