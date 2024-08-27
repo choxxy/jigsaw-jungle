@@ -36,8 +36,12 @@ const VERTICAL = "vertical";
 
 var prev;
 
+
 itemClicked = function (element) {
     const id = element.getElementsByTagName("img")[0].id;
+    // increment played count
+
+
     const nextPageUrl = `puzzle?id=${id}`;
     // Navigate to the next page
     window.location.href = nextPageUrl;
@@ -813,4 +817,3 @@ function numFrames(img) {
 }
 
 
-import { hello } from './hello.js';
