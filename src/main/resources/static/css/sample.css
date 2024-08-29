@@ -42,15 +42,16 @@ nav .logo a{
 }
 
 nav .logo img{
-    width: 32px;
-    height: 32px;
-    position: absolute;
+    width: 48px;
+    height: 48px;
+    position: relative;
     margin: 5px;
 }
 
-
 nav .logo h2 {
     color: whitesmoke;
+    font-size: 28px;
+    margin: auto;
 }
 
 nav.sticky .logo a{
@@ -114,6 +115,7 @@ h2{
     margin-bottom: 14px;
     border-radius: 4px;
 }
+
 .gallery .images img {
     width: 100%;
     z-index: 2;
@@ -123,28 +125,13 @@ h2{
     position: absolute;
     z-index: 4;
     width: 100%;
-    bottom: -100px;
+    bottom: 0;
     display: flex;
-    align-items: center;
-    padding: 15px 20px;
+    align-items: flex-start;
+    padding: 8px;
     justify-content: space-between;
     transition: bottom 0.1s ease;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-}
-.images li:hover .details {
-    bottom: 0;
-}
-.photographer {
-    color: #fff;
-    display: flex;
-    align-items: center;
-}
-.photographer i {
-    font-size: 1.4rem;
-    margin-right: 10px;
-}
-.photographer span {
-    font-size: 1.05rem;
 }
 button, i {
     outline: none;
@@ -289,4 +276,26 @@ header .buttons i:last-child:hover {
         padding: 10px 25px;
         font-size: 1.05rem;
     }
+}
+
+.like{
+    width: 24px;
+    height: 24px;
+    color: whitesmoke;
+}
+
+.played{
+    width: 20px;
+    height: 20px;
+    margin-left: 1em;
+    color: whitesmoke;
+}
+
+.stats{
+    display: flex;
+    align-items: center;
+}
+.stats span {
+    padding: 8px;
+    color: whitesmoke;
 }

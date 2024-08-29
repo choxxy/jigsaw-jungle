@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Pixiepalette</title>
-    <link rel="stylesheet" href="css/sample.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+{{> header}}
 <body>
 <nav>
     <div class="nav-content">
         <div class="logo">
-            <h2>Pixie Palette Picture Puzzles</h2>
+            <img src="images/jigsawjungle.png"  alt="site-logo"/>
+            <h2>Jigsaw Jungle</h2>
         </div>
 <!--        <ul class="nav-links">-->
 <!--            <li><a href="studio">Create</a></li>-->
@@ -25,9 +21,8 @@
             <li class="card" onclick="itemClicked(this)">
                 <img id="{{id}}" src="{{photoUrl}}" alt="img">
                 <div class="details">
-                    <div class="photographer">
-                        <i class="uil uil-camera"></i>
-                        <span>{{description}}</span>
+                    <div class="stats">
+                        <img class="like" src="images/like.svg"/>  <span>{{likes}}</span>   <img class="played" src="images/played.svg"/> <span>{{played}}</span>
                     </div>
                 </div>
             </li>

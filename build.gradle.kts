@@ -4,7 +4,7 @@ import java.time.Instant
 plugins {
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
-    id("com.google.cloud.tools.jib") version "3.4.2"
+    id("com.google.cloud.tools.jib") version "3.4.3"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
@@ -17,7 +17,7 @@ allOpen {
 }
 
 group = "com.ninjabyte"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21

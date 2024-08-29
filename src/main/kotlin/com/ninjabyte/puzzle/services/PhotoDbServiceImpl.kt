@@ -1,7 +1,7 @@
 package com.ninjabyte.puzzle.services
 
 import com.ninjabyte.puzzle.entities.Photo
-import com.ninjabyte.puzzle.repos.PhotoRepository
+import com.ninjabyte.puzzle.repositories.PhotoRepository
 import org.springframework.stereotype.Service
 
 @Service

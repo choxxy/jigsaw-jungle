@@ -1,4 +1,4 @@
-package com.ninjabyte.puzzle.controler
+package com.ninjabyte.puzzle.controllers
 
 import com.ninjabyte.puzzle.entities.Photo
 import com.ninjabyte.puzzle.extensions.format
@@ -28,8 +28,8 @@ class HtmlController(
 
     @GetMapping("/")
     fun home(model: Model): String {
-        model["title"] = "Puzzle"
-        model["cssFile"] = "css/style.css"
+        model["title"] = "Jigsaw Jungle"
+        model["cssFile"] = "css/sample.css"
         model["photos"] = photoDbService.loadAll().map { it.render() }
         return "home"
     }

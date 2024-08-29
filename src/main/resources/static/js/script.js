@@ -41,49 +41,42 @@ function likePhoto(id) {
     fetch(`/api/photos/${id}/like`, {
         method: 'PUT'
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Photo liked:', data);
-    })
-    .catch(error => {
-        console.error('There was a problem with the like request:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Photo liked:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the like request:', error);
+        });
 }
 
 function playPhoto(id) {
     fetch(`/api/photos/${id}/play`, {
         method: 'PUT'
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Photo played:', data);
-    })
-    .catch(error => {
-        console.error('There was a problem with the play request:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Photo played:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the play request:', error);
+        });
 }
 
 itemClicked = function (element) {
-    const id = element.getElementsByTagName("img")[0].id;
-    // increment played count
-    playPhoto(id);
-    const id = element.getElementsByTagName("img")[0].id;
-    // increment played count
-
-
-    const nextPageUrl = `puzzle?id=${id}`;
+    let photoId = element.getElementsByTagName("img")[0].id;
     // Navigate to the next page
-    window.location.href = nextPageUrl;
+    window.location.href = `puzzle?id=${photoId}`;
 }
 
 const list = document.getElementById("photo-list");
@@ -554,6 +547,9 @@ function onComplete() {
 function onSolve() {
     solved = true;
     previewing = millis();
+
+    // increment played count
+    playPhoto(photoId);
 
     // @event
     window.parent.document.dispatchEvent(

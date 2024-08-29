@@ -97,8 +97,14 @@
         </div>
         <!-- social -->
         <div class="tooltip">
-            <span class="tooltip-content">Share</span>
-            <div class="functionality twitter" onclick="share()">
+            <span class="tooltip-content">Facebook</span>
+            <div class="functionality twitter" data-sharer="facebook" data-hashtag="jigsawjungle" data-url="https://jigsawjungle.net/">
+                <i class="fab fa-facebook"></i>
+            </div>
+        </div>
+        <div class="tooltip">
+            <span class="tooltip-content">X</span>
+            <div class="functionality twitter" data-sharer="twitter" data-title="Jigsaw Jungle" data-hashtags="jigsaw, jigsawjungle" data-url="https://jigsawjungle.net/">
                 <i class="fab fa-twitter"></i>
             </div>
         </div>
@@ -127,7 +133,8 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script>
 <script src="js/jigsaw.js"></script>
 <script src="js/plugins/cors.js"></script>
 <script src="js/plugins/transform.js"></script>
