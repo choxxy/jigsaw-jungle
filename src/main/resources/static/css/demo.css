@@ -6,16 +6,15 @@ svg[hidden] {
 
 .site-navigation {
 	width: 100%;
-	height: 6%;
+	height: 8vh;
 	top: 0;
 	position: fixed;
 	box-shadow: 2px 2px 4px rgba(0,0,0,.2);
-	background: #1da1f2;
+	background: #222;
 	color: whitesmoke;
 	display: flex;
 	flex-flow: column wrap;
 	align-content: space-between;
-	padding-left: 2em;
 	padding-right: 3em;
 	justify-content: center;
 }
@@ -27,6 +26,27 @@ svg[hidden] {
 	padding: 8px 16px;
 	text-decoration: none;
 	font-size: 17px;
+}
+
+nav .logo{
+	display: flex;
+}
+
+nav .logo img{
+	width: 36px;
+	height: 36px;
+	position: relative;
+	margin: 5px;
+}
+
+nav .logo h2 {
+	color: whitesmoke;
+	font-size: 24px;
+	margin: auto;
+}
+
+nav.sticky .logo a{
+	color: #fff;
 }
 
 .clicky-menu {
@@ -104,7 +124,7 @@ svg[hidden] {
 	margin-top: .35em;
 	padding: 0;
 	list-style: none;
-	background: #1da1f2;
+	background: #222;
 	color: whitesmoke;
 	border-radius: 3px;
 }

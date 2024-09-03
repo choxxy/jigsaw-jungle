@@ -37,41 +37,7 @@ const VERTICAL = "vertical";
 var prev;
 
 
-function likePhoto(id) {
-    fetch(`/api/photos/${id}/like`, {
-        method: 'PUT'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Photo liked:', data);
-        })
-        .catch(error => {
-            console.error('There was a problem with the like request:', error);
-        });
-}
 
-function playPhoto(id) {
-    fetch(`/api/photos/${id}/play`, {
-        method: 'PUT'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Photo played:', data);
-        })
-        .catch(error => {
-            console.error('There was a problem with the play request:', error);
-        });
-}
 
 itemClicked = function (element) {
     let photoId = element.getElementsByTagName("img")[0].id;
@@ -851,4 +817,43 @@ function numFrames(img) {
     return img.numFrames() || 1;
 }
 
+function like(){
+    likePhoto(photoId)
+}
+
+function likePhoto(id) {
+    fetch(`/api/photos/${id}/like`, {
+        method: 'PUT'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Photo liked:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the like request:', error);
+        });
+}
+
+function playPhoto(id) {
+    fetch(`/api/photos/${id}/play`, {
+        method: 'PUT'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Photo played:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the play request:', error);
+        });
+}
 
