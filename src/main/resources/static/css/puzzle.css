@@ -358,3 +358,35 @@ a:hover {
 .button--next {
     right: 1.5rem;
 }
+
+@media screen and (max-width: 768px) {
+    .functionality{
+        width: 32px;
+        height: 32px;
+    }
+
+    .ui-container {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 42px;
+        display: flex;
+        flex-direction: row;
+        transition: 0.25s all;
+    }
+
+    .tooltip {
+        margin-right: 10px;
+    }
+
+    .tooltip-content{
+        display: none;
+    }
+
+    #main-menu {
+        display: none;
+    }
+}

@@ -84,9 +84,10 @@ nav.sticky .nav-links li a:hover{
 }
 
 h2{
-    font-size: 30px;
-    margin-bottom: 6px;
-    color: #4070f4;
+    font-size: 24px;
+    margin-left: 36px;
+    margin-top: 16px;
+    color: #222;
 }
 .text{
     text-align: justify;
@@ -102,7 +103,7 @@ h2{
 .gallery .images {
     gap: 15px;
     max-width: 95%;
-    margin-top: 40px;
+    margin-top: 16px;
     columns: 5 340px;
     list-style: none;
 }
