@@ -7,7 +7,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.4.3"
     kotlin("plugin.spring") version "1.9.25"
     kotlin("jvm") version "2.0.20"
-    kotlin("plugin.jpa") version "1.9.25"
+    kotlin("plugin.jpa") version "2.0.20"
 }
 
 allOpen {
