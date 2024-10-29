@@ -1,6 +1,5 @@
 package com.ninjabyte.puzzle
 
-import com.ninjabyte.puzzle.services.StorageService
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -27,13 +26,6 @@ import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
 class PuzzleApplication {
-    @Bean
-    fun commandLineRunner(storageService: StorageService): CommandLineRunner {
-        return CommandLineRunner { args: Array<String?>? ->
-            // storageService.deleteAll()
-            storageService.init()
-        }
-    }
 
     companion object {
         @JvmStatic

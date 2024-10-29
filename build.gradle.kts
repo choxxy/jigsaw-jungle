@@ -17,7 +17,7 @@ allOpen {
 }
 
 group = "com.ninjabyte"
-version = "0.0.5"
+version = "0.0.8"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -41,6 +41,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    implementation("com.cloudinary:cloudinary-http5:2.0.0")
 }
 
 tasks.withType<KotlinCompile> {

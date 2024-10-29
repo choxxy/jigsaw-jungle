@@ -12,7 +12,7 @@
 <nav id="site-navigation" class="site-navigation">
     <a class="home-menu" href="/">
         <div class="logo">
-            <img src="images/jigsawjungle.png" alt="site-logo"/>
+            <img src="images/jigsawjungle.webp" alt="site-logo"/>
             <h2>Jigsaw Jungle</h2>
         </div>
     </a>
@@ -125,11 +125,10 @@
         <ul id="photo-list">
             {{#photos}}
                 <li class="card" onclick="itemClicked(this)">
-                    <img id="{{id}}" src="{{photoUrl}}" alt="img">
+                    <img id="{{id}}" src="{{url}}" alt="img">
                     <div class="details">
                         <div class="photographer">
                             <i class="uil uil-camera"></i>
-                            <span>{{description}}</span>
                         </div>
                     </div>
                 </li>
@@ -145,7 +144,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/p5@1.10.0/lib/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/p5.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script>
 <script src="js/jigsaw.js"></script>
 <script src="js/plugins/cors.js"></script>

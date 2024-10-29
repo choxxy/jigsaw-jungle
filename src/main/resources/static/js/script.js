@@ -36,9 +36,6 @@ const VERTICAL = "vertical";
 
 var prev;
 
-
-
-
 itemClicked = function (element) {
     let photoId = element.getElementsByTagName("img")[0].id;
     // Navigate to the next page
@@ -430,7 +427,7 @@ function draw() {
     updateViews(placed.length, pieces.length);
 }
 
-function mousePressed() {
+function handleInput() {
     if (!error && !solved)
         for (let piece of pieces) {
             if (piece.pressed()) {
@@ -449,11 +446,29 @@ function mousePressed() {
         }
 }
 
-function mouseReleased() {
+function mousePressed() {
+    handleInput();
+}
+
+function touchStarted() {
+    handleInput();
+    return false;  // Prevent default behavior
+}
+
+function handleRelease(){
     if (!error && !solved)
         for (let piece of pieces) {
             piece.released();
         }
+}
+
+function touchEnded() {
+    handleRelease();
+    return false;
+}
+
+function mouseReleased() {
+    handleRelease();
 }
 
 // --- events ---

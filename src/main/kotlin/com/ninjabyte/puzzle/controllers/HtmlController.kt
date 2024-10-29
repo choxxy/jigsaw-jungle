@@ -1,9 +1,8 @@
 package com.ninjabyte.puzzle.controllers
 
-import com.ninjabyte.puzzle.entities.Photo
-import com.ninjabyte.puzzle.extensions.format
-import com.ninjabyte.puzzle.services.PhotoDbService
-import com.ninjabyte.puzzle.services.StorageService
+import com.ninjabyte.puzzle.entities.Image
+import com.ninjabyte.puzzle.services.ImageService
+import com.ninjabyte.puzzle.services.dtos.ImageModel
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpHeaders
@@ -12,25 +11,22 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.io.IOException
+import java.util.*
 
 
 @Controller
 class HtmlController(
-    private val photoDbService: PhotoDbService,
-    private val storageService: StorageService
+    private val imageService: ImageService
 ) {
 
     @GetMapping("/")
     fun home(model: Model): String {
         model["title"] = "Jigsaw Jungle"
         model["cssFile"] = "css/sample.css"
-        model["photos"] = photoDbService.loadAll().map { it.render() }
+        model["photos"] = imageService.loadAll().map { it.render() }
         return "home"
     }
 
@@ -41,7 +37,7 @@ class HtmlController(
 
     @GetMapping("/studio")
     fun studio(model: Model): String {
-        model["photos"] = photoDbService.loadAll().map { it.render() }
+        model["images"] = imageService.loadAll().map { it.render() }
         return "studio"
     }
 
@@ -50,37 +46,40 @@ class HtmlController(
         @RequestParam(name = "id", required = true) id: String,
         model: Model
     ): String {
-        val photo = photoDbService.load(id.toLong())
+        val image = imageService.load(UUID.fromString(id))
         model["title"] = "Puzzle"
         model["cssFile"] = "css/puzzle.css"
-        model["photoUrl"] = photo.photoUrl
-        model["photoId"] = photo.id
-        model["photos"] = photoDbService.loadAll().shuffled().take(8).map { it.render() }
+        model["photoUrl"] = image.url
+        model["photoId"] = image.id.toString()
+        model["photos"] = imageService.loadAll().shuffled().take(8).map { it.render() }
         return "puzzle"
     }
 
     @PostMapping("/upload")
-    fun uploadFile(@RequestParam("file") file: MultipartFile, model: Model): String {
-        if (file.isEmpty) {
+    fun upload(@RequestParam("file") file: MultipartFile, model: Model): String {
+
+        val imageModel = ImageModel(
+            name = file.name,
+            file = file)
+
+        if (imageModel.file.isEmpty) {
             model.addAttribute("message", "Please select a file to upload")
             return "studio"
         }
         try {
-            storageService.store(file)
-            model.addAttribute("message", "File uploaded successfully: " + file.originalFilename)
-        } catch (e: IOException) {
+            imageService.uploadImage(imageModel)
+            model.addAttribute("message", "File uploaded successfully: " + imageModel.name)
+        } catch (e: Exception) {
             e.printStackTrace()
             model.addAttribute("message", "Failed to upload file: " + e.message)
         }
-        storageService.loadAll().map { p ->
-            println(p.toString())
-        }
-        model["photos"] = photoDbService.loadAll().map { it.render() }
 
-        return "redirect:/"
+        model["photos"] = imageService.loadAll().map { it.render() }
+
+        return "studio"
     }
 
-    @GetMapping("/photos/{fileName:.+}")
+   /* @GetMapping("/photos/{fileName:.+}")
     fun downloadFile(@PathVariable fileName: String, request: HttpServletRequest): ResponseEntity<Resource> {
         // Load file as Resource
         val resource: Resource = storageService.loadAsResource(fileName)
@@ -105,27 +104,21 @@ class HtmlController(
                 ("attachment; filename=\"" + resource.filename).toString() + "\""
             )
             .body<Resource>(resource)
-    }
+    }*/
 
-    fun Photo.render() = RenderedPhoto(
-        photoUrl,
-        description,
-        originalFilename,
+    fun Image.render() = RenderedPhoto(
+        id,
+        name,
+        url,
         likes,
-        played,
-        createdOn.format(),
-        createdBy,
-        id
+        playCount
     )
 
     data class RenderedPhoto(
-        val photoUrl: String,
-        val description: String,
-        val originalFilename: String,
+        val id: UUID?,
+        val name: String,
+        val url: String,
         val likes: Int,
-        val played: Int,
-        val createdOn: String,
-        val createdBy: String,
-        val id: Long
+        val playCount: Int
     )
 }

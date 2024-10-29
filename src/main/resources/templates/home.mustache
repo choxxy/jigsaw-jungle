@@ -5,25 +5,22 @@
 <nav>
     <div class="nav-content">
         <div class="logo">
-            <img src="images/jigsawjungle.png"  alt="site-logo"/>
+            <img src="images/jigsawjungle.webp"  alt="site-logo"/>
             <h2>Jigsaw Jungle</h2>
         </div>
-<!--        <ul class="nav-links">-->
-<!--            <li><a href="studio">Create</a></li>-->
-<!--            <li><a href="#">About</a></li>-->
-<!--            <li><a href="#">Contact</a></li>-->
-<!--        </ul>-->
     </div>
 </nav>
+
 <H2> Featured Puzzles </H2>
 <section class="gallery">
     <ul class="images">
         {{#photos}}
             <li class="card" onclick="itemClicked(this)">
-                <img id="{{id}}" src="{{photoUrl}}" alt="img">
+                <img id="{{id}}" src="{{url}}" alt="img">
                 <div class="details">
                     <div class="stats">
-                        <img class="like" src="images/like.svg"/>  <span>{{likes}}</span>   <img class="played" src="images/played.svg"/> <span>{{played}}</span>
+                        <img class="like" src="images/like.svg" alt="like"/><span>{{likes}}</span>   <img class="played" alt="Play count" src="images/played.svg"/>
+                        <span>{{playCount}}</span>
                     </div>
                 </div>
             </li>
