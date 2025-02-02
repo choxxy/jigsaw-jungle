@@ -42,7 +42,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    implementation("com.cloudinary:cloudinary-http5:2.0.0")
+    implementation("com.cloudinary:cloudinary-http5:2.2.0")
 }
 
 tasks.withType<KotlinCompile> {
