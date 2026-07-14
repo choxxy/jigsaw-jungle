@@ -4,7 +4,7 @@ import java.time.Instant
 plugins {
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.cloud.tools.jib") version "3.4.4"
+    id("com.google.cloud.tools.jib") version "3.5.4"
     kotlin("plugin.spring") version "2.1.10"
     kotlin("jvm") version "2.1.10"
     kotlin("plugin.jpa") version "2.1.10"
