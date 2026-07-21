@@ -36,7 +36,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("commons-io:commons-io:2.18.0")
-    implementation("org.apache.tika:tika-core:3.1.0")
+    implementation("org.apache.tika:tika-core:3.3.2")
     implementation("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("org.postgresql:postgresql")
